@@ -1,5 +1,4 @@
-
-      //String newLine = System.getProperty("line.separator");
+//String newLine = System.getProperty("line.separator");
       
 class Led {
   color c;
@@ -10,7 +9,7 @@ class Led {
   int dome;
   int distanceGroup;
   boolean show;
-  boolean randomColor;
+  boolean randomColor = true;
 
   // The Constructor is defined with arguments.
   Led(int newColor, float tempXpos, float tempYpos, int tempXIndex, int tempYIndex, int tempDome, int tempDistanceGroup) {
@@ -28,9 +27,14 @@ class Led {
     show = true;
   }
   
+  void turnOff(){
+    show = false;
+  }
+  
   void toggleRandomColor(){
     randomColor = !randomColor;
   }
+  
   void inXRange(int activeXIndex, int lines) {
     int diff = activeXIndex - xIndex;
     if(diff > 0 && diff < lines){
@@ -40,7 +44,7 @@ class Led {
     }
   }
   
-   void inDistanceRange(int activeDome, int activeGroup, int lines) {
+  void inDistanceRange(int activeDome, int activeGroup, int lines) {
     int diff = activeGroup - distanceGroup;
     if(diff > 0 && diff < lines && (activeDome == dome || activeDome == 0)){
       show = true;
@@ -59,7 +63,7 @@ class Led {
     }else if(show == true) {
       stroke(c);
     } else {
-      stroke(30,30,30);
+      stroke(0,0,0);
     }
       strokeWeight(8);
       point(xPos, yPos);

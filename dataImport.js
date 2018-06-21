@@ -335,7 +335,7 @@ points
   })
   .forEach(point => {
     console.log(
-      `leds.add(new Led(color(${point.color},0,0), ${point.x}, ${point.y}, ${
+      `leds.add(new Led(color(255,255,255), ${point.x}, ${point.y}, ${
         point.xIndex
       }, ${point.yIndex}, ${point.domeNumber}, ${point.domeDistanceGroup}));`
     );

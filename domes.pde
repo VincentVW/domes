@@ -1,16 +1,10 @@
 int time = millis();
 int animationSpeed = 400;
+PImage img;
 
-void setup() {
-  size(1536, 768);
-  initLeds(leds);
-  background(0);
-  setupSlider();
-}
-
+// led animations
 boolean loopBack = true;
 boolean reverse = false;
-
 int currentAnimationIndex = 0;
 int currentAnimationMaxIndex = 60;
 int currentAnimationIndexSteps = 1;
@@ -18,35 +12,24 @@ int currentAnimationRange = 7;
 int currentAnimationDome = 0;
 String currentEffect = "insideOut";
 
-void activeInsideOut() {
-  currentEffect = "insideOut";
-  currentAnimationIndex = 0;
-  currentAnimationMaxIndex = 140;
-  currentAnimationIndexSteps = 2;
-  currentAnimationRange = 1;
-  currentAnimationDome = 0;
-}
+// stackable object animations
+boolean spotlightOn = false;
+boolean movingCircles = false;
 
-void activeLeftRight() {
-  currentAnimationIndex = 0;
-  currentAnimationMaxIndex = 60;
-  currentAnimationIndexSteps = 1;
-  currentAnimationRange = 7;
-  currentAnimationDome = 0;
-  currentEffect = "leftRight";
-}
-
-void activeAllOn() {
-  currentEffect = "allLightsOn";  
-}
-
-void toggleRandomColor(){
-  for (Led l : leds) {
-    l.toggleRandomColor(); 
-  }
+void setup() {
+  img = loadImage("mask.png");
+  size(1536, 768);
+  initLeds(leds);
+  background(0);
+  
+  // prepare all animations
+  setupSlider();
+  setupSpotlight();
+  setupMovingCircles();
 }
 
 void draw() {
+  background(0);
   strokeWeight(8);
 
   if (millis() > time + animationSpeed)
@@ -71,25 +54,43 @@ void draw() {
      }
      
      time = millis();  
+     
+     for (Led l : leds) {
+        switch (currentEffect) {
+          case "insideOut":  
+            l.inDistanceRange(currentAnimationDome, currentAnimationIndex, currentAnimationRange);
+            break;
+          case "leftRight":
+            l.inXRange(currentAnimationIndex, currentAnimationRange);
+            break;
+          case "allLightsOn":
+            l.turnOn();
+            break;
+          case "turnOff":
+            l.turnOff();
+            break;
+          default: 
+            //l.inXRange(currentAnimationIndex, currentAnimationRange);
+            break;
+        }
+      }
    }
-   
+  // redraw all leds every frame
   for (Led l : leds) {
-    switch (currentEffect) {
-      case "insideOut":  
-        l.inDistanceRange(currentAnimationDome, currentAnimationIndex, currentAnimationRange);
-        break;
-      case "leftRight":
-        l.inXRange(currentAnimationIndex, currentAnimationRange);
-        break;
-      case "allLightsOn":
-        l.turnOn();
-        break;
-      default: 
-        l.inXRange(currentAnimationIndex, currentAnimationRange);
-        break;
-    }
     l.display();
   }
+    
+  
+  // stackable object animations
+  if(spotlightOn){
+    drawSpotlight();
+  }
+  if(movingCircles){
+    drawMovingCircles();
+  }
+  
+  image(img, -5, 9);
   
   drawGui();
+  
 }

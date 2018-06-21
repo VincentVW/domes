@@ -32,25 +32,43 @@ void setupSlider(){
    
   cp5.addButton("insideOut")
      .setValue(0)
-     .setPosition(1250,250)
+     .setPosition(1250,300)
      .setSize(100,19)
      ;
   
   cp5.addButton("leftRight")
      .setValue(0)
-     .setPosition(1100,250)
+     .setPosition(1100,300)
      .setSize(100,19)
      ;
      
    cp5.addButton("allLightsOn")
    .setValue(0)
-   .setPosition(1400,250)
+   .setPosition(1400,300)
    .setSize(100,19)
    ;
    
    cp5.addButton("randomColors")
    .setValue(0)
    .setPosition(1100,350)
+   .setSize(100,19)
+   ;
+   
+   cp5.addButton("movingCircles")
+   .setValue(0)
+   .setPosition(1250,350)
+   .setSize(100,19)
+   ;
+   
+   cp5.addButton("turnOff")
+   .setValue(0)
+   .setPosition(1400,350)
+   .setSize(100,19)
+   ;
+   
+   cp5.addButton("spotlight")
+   .setValue(0)
+   .setPosition(1100,400)
    .setSize(100,19)
    ;
    
@@ -61,28 +79,4 @@ void drawGui(){
   strokeWeight(0);
   fill(100);
   rect(1024,0,width,height);
-}
-
-void animationSpeed(int newSpeed) {
-  animationSpeed = newSpeed;
-}
-
-void currentAnimationRange(int newRange) {
-  currentAnimationRange = newRange;
-}
-
-public void insideOut() {
-  activeInsideOut();
-}
-
-public void leftRight() {
-  activeLeftRight();
-}
-
-public void allLightsOn(){
-  activeAllOn();
-}
-
-public void randomColors(){
-  toggleRandomColor();
 }
