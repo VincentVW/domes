@@ -1,5 +1,7 @@
+import themidibus.*;
+
 int time = millis();
-int animationSpeed = 400;
+int animationSpeed = 500;
 PImage img;
 
 // led animations
@@ -10,22 +12,30 @@ int currentAnimationMaxIndex = 60;
 int currentAnimationIndexSteps = 1;
 int currentAnimationRange = 7;
 int currentAnimationDome = 0;
+
+int beatNumber = 0;
+int stepNumber = 0;
+
 String currentEffect = "insideOut";
 
+MovingCirclesScene movingCirclesScene;
+
 // stackable object animations
-boolean spotlightOn = false;
-boolean movingCircles = false;
+boolean spotlightOn = true;
+boolean shouldAlphaAnimate = true;
+boolean isBeatFrame = false;
 
 void setup() {
+  MidiBus.list();
   img = loadImage("mask.png");
   size(1536, 768);
-  initLeds(leds);
   background(0);
   
   // prepare all animations
-  setupSlider();
+  setupGUI();
   setupSpotlight();
-  setupMovingCircles();
+  
+  movingCirclesScene = new MovingCirclesScene();
 }
 
 void draw() {
@@ -34,6 +44,13 @@ void draw() {
 
   if (millis() > time + animationSpeed)
    {
+     isBeatFrame = true;
+     if(beatNumber == 15){
+       beatNumber = 0;
+     } else {
+       beatNumber += 1;
+     }
+     
      if(reverse == true){
        currentAnimationIndex -= currentAnimationIndexSteps;
        
@@ -54,7 +71,7 @@ void draw() {
      }
      
      time = millis();  
-     
+     stepNumber += 1;
      for (Led l : leds) {
         switch (currentEffect) {
           case "insideOut":  
@@ -67,30 +84,44 @@ void draw() {
             l.turnOn();
             break;
           case "turnOff":
-            l.turnOff();
+            l.inActiveDomeIndex(stepNumber);
             break;
           default: 
             //l.inXRange(currentAnimationIndex, currentAnimationRange);
             break;
         }
+        
+        if(shouldAlphaAnimate){
+          l.alphaAnimate();
+        }
+        
       }
+      
+      
+      
+   } else {
+     isBeatFrame = false;
    }
   // redraw all leds every frame
   for (Led l : leds) {
     l.display();
-  }
     
-  
-  // stackable object animations
+  }
+
+   //stackable object animations
   if(spotlightOn){
     drawSpotlight();
   }
-  if(movingCircles){
-    drawMovingCircles();
-  }
+  
+  movingCirclesScene.display(); 
   
   image(img, -5, 9);
   
   drawGui();
-  
 }
+
+
+
+void controllerChange(int channel, int number, int value) {
+  print("channel: "+channel+", number: "+number+"value: "+value);
+} 

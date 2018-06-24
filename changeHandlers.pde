@@ -1,10 +1,18 @@
+// main animation speed 
 
 void animationSpeed(int newSpeed) {
   animationSpeed = newSpeed;
 }
 
-void currentAnimationRange(int newRange) {
-  currentAnimationRange = newRange;
+
+// Main led animations
+
+public void allOn(){
+  currentEffect = "allLightsOn";
+}
+
+public void turnOff(){
+  currentEffect = "turnOff"; 
 }
 
 public void insideOut() {
@@ -25,24 +33,51 @@ public void leftRight() {
   currentEffect = "leftRight";
 }
 
-public void allLightsOn(){
-  currentEffect = "allLightsOn";
+public void alphaAnimate() {
+  shouldAlphaAnimate = !shouldAlphaAnimate;
 }
 
-public void randomColors(){
-  for (Led l : leds) {
-    l.toggleRandomColor(); 
+void currentAnimationRange(int newRange) {
+  currentAnimationRange = newRange;
+}
+
+void ledsAlpha(int newAlpha) {
+   for (Led l : leds) {
+    l.setAlpha(newAlpha); 
   }
 }
+
+public void ledColorScheme(float newValue){
+  for (Led l : leds) {
+    l.setColorScheme(int(newValue));
+  }
+}
+
+public void alphaFuzz(float newValue){
+  float currentLedAlphaAmount = cp5.getController("ledsAlpha").getValue();
+  print(currentLedAlphaAmount);
+  for (Led l : leds) {
+    l.setAlphaFuzz(int(newValue), currentLedAlphaAmount);
+  }
+}
+
+
+// object animations
 
 public void spotlight(){
   spotlightOn = !spotlightOn; 
 }
 
-public void turnOff(){
-  currentEffect = "turnOff"; 
+public void movingCircles(){
+  if(movingCirclesScene != null){
+    if(movingCirclesScene.circleCount() > 0){ 
+      movingCirclesScene.deleteCircles();
+    } else {
+      movingCirclesScene.addCircles();
+    }
+  }
 }
 
-public void movingCircles(){
-  movingCircles = !movingCircles;
-}
+
+
+// see bpm tab for beatmatch related

@@ -1,20 +1,21 @@
-//String newLine = System.getProperty("line.separator");
-      
 class Led {
-  color c;
+  color c = color(255,255,255);
   float xPos;
   float yPos;
   int xIndex;
   int yIndex;
+  int ledIndex;
+  int dome1Index;
   int dome;
   int distanceGroup;
   boolean show;
-  boolean randomColor = true;
-
+  int alpha = 255;
+  
   // The Constructor is defined with arguments.
-  Led(int newColor, float tempXpos, float tempYpos, int tempXIndex, int tempYIndex, int tempDome, int tempDistanceGroup) {
-    show = true;
-    c = newColor;
+  Led(int tempLedIndex, int tempDome1Index, float tempXpos, float tempYpos, int tempXIndex, int tempYIndex, int tempDome, int tempDistanceGroup) {
+    show = false;
+    ledIndex = tempLedIndex;
+    dome1Index = tempDome1Index;
     xPos = tempXpos;
     yPos = tempYpos;
     xIndex = tempXIndex;
@@ -31,8 +32,66 @@ class Led {
     show = false;
   }
   
-  void toggleRandomColor(){
-    randomColor = !randomColor;
+  void setAlpha(int newAlpha){
+    alpha = newAlpha;
+  }
+  
+  void setColorScheme(int scheme){
+    
+    switch (scheme) {
+        case 0:  
+          c = color(255,255,255);
+          break;
+        case 1:
+          c = randomArtDecoColor();
+          break;
+        case 2:
+          c = color(random(255), random(255), random(255));
+          break;
+        default: 
+          c = color(255,255,255);
+          break;
+      }
+  }
+  
+  public int calcFuzz(float deviation, float currentAlpha){
+     if(random(1) > 0.5){
+       if((currentAlpha + deviation) > 255){
+         return 255;
+       } else{
+         return int(currentAlpha + deviation);
+       }
+     }
+     if((currentAlpha - deviation) < 0){
+       return 0;
+     } else{
+       return int(currentAlpha - deviation);
+     }
+  }
+  
+  void alphaAnimate(){
+    alpha = calcFuzz(30, alpha);
+  }
+  
+  void setAlphaFuzz(int amount, float currentAlpha){
+    
+    switch (amount) {
+        case 0:  
+          // no fuzz
+          alpha = int(currentAlpha);
+          break;
+        case 1:
+          // light fuzz
+          alpha = calcFuzz(random(50), currentAlpha);
+          break;
+        case 2:
+          // high fuzz
+          alpha = calcFuzz(random(150), currentAlpha);
+          break;
+        default: 
+          alpha = int(currentAlpha);
+          break;
+      }
   }
   
   void inXRange(int activeXIndex, int lines) {
@@ -53,19 +112,25 @@ class Led {
     }
   }
   
+  void inActiveDomeIndex(int index){
+    if(dome1Index <= index){
+      show = true;
+    }
+  }
+  
   void changeColor(color newColor){
     c = newColor;
   }
       
   void display() {
-    if(show == true && randomColor == true){
-      stroke( random(255), random(255), random(255)); 
-    }else if(show == true) {
-      stroke(c);
-    } else {
-      stroke(0,0,0);
-    }
+    if(show == true) {
+      stroke(c, alpha);
       strokeWeight(8);
       point(xPos, yPos);
+      
+      //textSize(14);
+      //fill(255, 0, 0);
+      //text(ledIndex, xPos+3, yPos); 
+    }
   }
 }

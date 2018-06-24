@@ -1,24 +1,42 @@
-Ball[] balls =  { 
-  new Ball(100, 400, 20), 
-  new Ball(700, 400, 40),
-  new Ball(600, 400, 60), 
-  new Ball(500, 200, 80)
-};
+import java.util.Arrays;
 
-void setupMovingCircles() {
- //smooth();
- ellipseMode(CENTER);
-}
 
-void drawMovingCircles() {
+class MovingCirclesScene {
+  ArrayList <Ball> balls = new ArrayList<Ball>();
+  String colorScheme = "white";
 
-  for (Ball b : balls) {
-    b.update();
-    b.display();
-    b.checkBoundaryCollision();
+  MovingCirclesScene() {
+    ellipseMode(CENTER);
   }
   
-  balls[0].checkCollision(balls[1]);
+  public int circleCount(){
+   return balls.size(); 
+  }
+  
+  void deleteCircles(){
+   balls.clear();
+  }
+  
+  void addCircles() {
+    balls.addAll(Arrays.asList(
+      new Ball(100, 400, 100), 
+      new Ball(700, 400, 90),
+      new Ball(600, 400, 60), 
+      new Ball(500, 200, 80),
+      new Ball(600, 400, 50), 
+      new Ball(500, 200, 88),
+      new Ball(600, 400, 130), 
+      new Ball(500, 200, 150))
+     );
+  }
+
+  void display() {
+    for (Ball b : balls) {
+      b.update();
+      b.display();
+      b.checkBoundaryCollision();
+    }
+  }
 }
 
 
@@ -154,13 +172,16 @@ class Ball {
 
   void display() {
     noStroke();
-    //fill(204);
-    //ellipse(position.x, position.y, radius*2, radius*2);
     
-    for (int i = 1; i < 20; i++) {
-      //fill(float(i)*20);
-      fill(ballColor);
-      ellipse(position.x, position.y, radius*2-((radius / 10)*i), radius*2-(radius / 10*i));
+    for (int i = 1; i < 10; i++) {
+      fill(ballColor, float(i)*14);
+      ellipse(position.x, position.y, radius-((radius / 5)*i), radius-(radius / 5)*i);
     }
+    
+    //for (int i = 1; i < 20; i++) {
+    //  //fill(float(i)*20);
+    //  fill(ballColor, float(i)*20);
+    //  ellipse(position.x, position.y, radius*2-((radius / 10)*i), radius*2-(radius / 10*i));
+    //}
   }
 }

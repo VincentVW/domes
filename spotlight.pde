@@ -1,48 +1,38 @@
-float x;
-float y;
-float easing = 0.05;
-
-
-
-void setupSpotlight() {
-  
-}
+import de.looksgood.ani.*;
 
 float spotlightTargetX = random(800) + 150;
 float spotlightTargetY = random(500) + 150;
+float spotlightRadius = 300;
+float easing = 0.01;
+
+
+void setupSpotlight() {
+  // you have to call always Ani.init() first!
+  Ani.init(this);
+  // set the default easing
+  Ani.setDefaultEasing(Ani.QUART_IN_OUT);
+
+}
 
 void drawSpotlight() {
   
-  if (millis() > time + animationSpeed){
-    spotlightTargetX = random(800) + 150;
-    spotlightTargetY = random(500) + 150;
+  if (isBeatFrame){
+    float newX = spotlightTargetX + random(400) - 200;
+    if(newX > 1000){newX = 900; }
+    float newY = spotlightTargetY + random(400) - 200;
+    if(newY > 1000){newY = 500; }
+    Ani.to(this, 1.5, "spotlightTargetX", newX);
+    Ani.to(this, 2.0, "spotlightTargetY", newY);
   }
   
-  float dx = spotlightTargetX - x;
-  x += dx * easing;
-  
-  float dy = spotlightTargetY - y;
-  y += dy * easing;
-  
-  //float radius = 300;
-  
-  //for (int i = 1; i < 20; i++) {
-  //    fill(float(i)*20);
-  //    ellipse(x, y, radius*2-((radius / 10)*i), radius*2-(radius / 10*i));
-  //  }
-  
     
-  //    float radius = 200;
+  for (int i = 1; i < 10; i++) {
+    fill(255,255,255, float(i)*14);
+    ellipse(spotlightTargetX, spotlightTargetY, spotlightRadius-((spotlightRadius / 5)*i), spotlightRadius-(spotlightRadius / 5)*i);
+  }
   
-  //for (int i = 1; i < 20; i++) {
-  //    fill(float(i)*20);
-  //    ellipse(x, y, radius*2-((radius / 10)*i), radius*2-(radius / 10*i));
-  //  }
-    
-     for (int i = 1; i < 20; i++) {
-        fill(float(i)*10);
-        ellipse(x, y, 300-(2*i), 300-(2*i));
-      }
-      
-
+  //for (int i = 1; i < 10; i++) {
+  //  fill(255,255,255, float(i)*14);
+  //  ellipse(spotlightTargetX, spotlightTargetY, spotlightRadius-((spotlightRadius / 10)*i), spotlightRadius-(spotlightRadius / 10)*i);
+  //}
 }
