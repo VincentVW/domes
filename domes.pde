@@ -1,5 +1,3 @@
-import themidibus.*;
-
 int time = millis();
 int animationSpeed = 500;
 PImage img;
@@ -26,7 +24,6 @@ boolean shouldAlphaAnimate = true;
 boolean isBeatFrame = false;
 
 void setup() {
-  MidiBus.list();
   img = loadImage("mask.png");
   size(1536, 768);
   background(0);
@@ -97,8 +94,6 @@ void draw() {
         
       }
       
-      
-      
    } else {
      isBeatFrame = false;
    }
@@ -119,9 +114,3 @@ void draw() {
   
   drawGui();
 }
-
-
-
-void controllerChange(int channel, int number, int value) {
-  print("channel: "+channel+", number: "+number+"value: "+value);
-} 
