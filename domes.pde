@@ -81,6 +81,9 @@ void draw() {
             l.turnOn();
             break;
           case "turnOff":
+            l.turnOff();
+            break;
+          case "swirl":
             l.inActiveDomeIndex(stepNumber);
             break;
           default: 

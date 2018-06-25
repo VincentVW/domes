@@ -17,12 +17,12 @@ void setupSpotlight() {
 void drawSpotlight() {
   
   if (isBeatFrame){
-    float newX = spotlightTargetX + random(400) - 200;
-    if(newX > 1000){newX = 900; }
-    float newY = spotlightTargetY + random(400) - 200;
-    if(newY > 1000){newY = 500; }
-    Ani.to(this, 1.5, "spotlightTargetX", newX);
-    Ani.to(this, 2.0, "spotlightTargetY", newY);
+    float newX = spotlightTargetX + random(600) - 300;
+    if(newX > 1000){newX = 900; } else if(newX < 100){ newX = 200; }
+    float newY = spotlightTargetY + random(600) - 300;
+    if(newY > 1000){newY = 500; } else if(newY < 100){newY = 200; }
+    Ani.to(this, 0.8, "spotlightTargetX", newX);
+    Ani.to(this, 1.2, "spotlightTargetY", newY);
   }
   
     

@@ -68,6 +68,16 @@ public void spotlight(){
   spotlightOn = !spotlightOn; 
 }
 
+public void swirl(){
+  currentAnimationIndex = 0;
+  currentAnimationMaxIndex = 150;
+  currentAnimationIndexSteps = 1;
+  currentAnimationRange = 7;
+  currentAnimationDome = 0;
+  stepNumber = 0;
+  currentEffect = "swirl";
+}
+
 public void movingCircles(){
   if(movingCirclesScene != null){
     if(movingCirclesScene.circleCount() > 0){ 
