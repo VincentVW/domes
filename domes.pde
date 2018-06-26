@@ -19,8 +19,8 @@ String currentEffect = "insideOut";
 MovingCirclesScene movingCirclesScene;
 
 // stackable object animations
-boolean spotlightOn = true;
-boolean shouldAlphaAnimate = true;
+boolean spotlightOn = false;
+boolean shouldAlphaAnimate = false;
 boolean isBeatFrame = false;
 
 void setup() {
@@ -31,6 +31,7 @@ void setup() {
   // prepare all animations
   setupGUI();
   setupSpotlight();
+  setupCircleBang();
   
   movingCirclesScene = new MovingCirclesScene();
 }
@@ -42,11 +43,8 @@ void draw() {
   if (millis() > time + animationSpeed)
    {
      isBeatFrame = true;
-     if(beatNumber == 15){
-       beatNumber = 0;
-     } else {
-       beatNumber += 1;
-     }
+     beatNumber = beatNumber == 15 ? 0 : (beatNumber += 1);
+     
      
      if(reverse == true){
        currentAnimationIndex -= currentAnimationIndexSteps;
@@ -111,6 +109,9 @@ void draw() {
     drawSpotlight();
   }
   
+  curveBallDraw();
+  drawCircleBang();
+
   movingCirclesScene.display(); 
   
   image(img, -5, 9);

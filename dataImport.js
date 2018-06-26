@@ -796,7 +796,7 @@ points
   })
   .forEach((point, index) => {
     console.log(
-      `new Led(${index}, ${point.dome1Index || 0}, ${point.x}, ${point.y}, ${
+      `new Led(${index}, ${point.dome1Index || 9999}, ${point.x}, ${point.y}, ${
         point.xIndex
       }, ${point.yIndex}, ${point.domeNumber}, ${point.domeDistanceGroup}),`
     );

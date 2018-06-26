@@ -65,28 +65,24 @@ void setupGUI(){
 
   cp5.addToggle("insideOut")
      .setLabel("Inside out")
-     .setValue(0)
      .setPosition(1250,80)
      .setSize(100,19)
      ;
 
   cp5.addToggle("leftRight")
      .setLabel("Left to right")
-     .setValue(0)
      .setPosition(1100,80)
      .setSize(100,19)
      ;
 
    cp5.addToggle("alphaAnimate")
      .setLabel("Animate alpha")
-     .setValue(0)
      .setPosition(1400,80)
      .setSize(100,19)
      ;
 
    cp5.addButton("allOn")
    .setLabel("All leds on")
-   .setValue(0)
    .setPosition(1100,40)
    .setSize(100,19)
    ;
@@ -100,24 +96,28 @@ void setupGUI(){
 
    cp5.addToggle("swirl")
    .setLabel("Swirl test")
-   .setValue(0)
    .setPosition(1400,200)
    .setSize(100,19)
    ;
 
    cp5.addToggle("movingCircles")
-   .setValue(0)
    .setPosition(1250, 300)
    .setSize(100,19)
    ;
 
    cp5.addToggle("spotlight")
-   .setValue(0)
    .setPosition(1100,300)
    .setSize(100,19)
    ;
 
-
+    
+   // bangs
+   
+   cp5.addButton("curveBallBang")
+     .setPosition(1100, 400)
+     .setSize(100,19);
+     
+     
 
 
    // add a vertical slider
@@ -133,40 +133,34 @@ void setupGUI(){
     cp5.getController("animationSpeed").getCaptionLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(0);
 
    cp5.addButton("tapBPM")
-   .setValue(0)
    .setPosition(1100,700)
    .setSize(100,19)
    ;
 
    cp5.addButton("resetBpmCount")
-   .setValue(0)
    .setPosition(1400,700)
    .setSize(100,19)
    ;
 
    cp5.addButton("startAnimation")
-   .setValue(0)
    .setPosition(1220,700)
    .setSize(100,19)
    ;
 
    cp5.addButton("scrubBack")
    .setLabel("Scrub < TODO")
-   .setValue(0)
    .setPosition(1100,674)
    .setSize(100,19)
    ;
 
    cp5.addButton("scrubForward")
    .setLabel("Scrub > TODO")
-   .setValue(0)
    .setPosition(1220,674)
    .setSize(100,19)
    ;
 
    cp5.addButton("resetScrub")
    .setLabel("Reset scrub TODO")
-   .setValue(0)
    .setPosition(1400,674)
    .setSize(100,19)
    ;

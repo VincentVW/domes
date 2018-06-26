@@ -88,6 +88,18 @@ public void movingCircles(){
   }
 }
 
+public void curveBallBang() {
+  curveBallPct = 0.0;
+  curveBallBeginX = curveBallX;
+  curveBallBeginY = curveBallY;
+  curveBallEndX = random(800) + 100;
+  curveBallEndY = random(400) + 200;
+  curveBallDistX = curveBallEndX - curveBallBeginX;
+  curveBallDistY = curveBallEndY - curveBallBeginY;
+  
+circle.bang();
+}
+
 
 
 // see bpm tab for beatmatch related

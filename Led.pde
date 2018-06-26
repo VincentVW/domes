@@ -131,6 +131,7 @@ class Led {
       //textSize(14);
       //fill(255, 0, 0);
       //text(ledIndex, xPos+3, yPos); 
-    }
+    } 
+    
   }
 }
