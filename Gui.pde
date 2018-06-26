@@ -100,7 +100,7 @@ void setupGUI(){
    .setSize(100,19)
    ;
 
-   cp5.addToggle("movingCircles")
+   cp5.addBang("movingCircles")
    .setPosition(1250, 300)
    .setSize(100,19)
    ;
@@ -188,8 +188,7 @@ void setupGUI(){
   midimapper.put( ref( device, 56 ), "movingCircles" );
   //midimapper.put( ref( device, 58 ), "animateAlpha" );
   
-  //midimapper.put( ref( device, 53 ), "a-6" );
-
+  midimapper.put( ref( device, 53 ), "curveBallBang" );
   //midimapper.put( ref( device, 55 ), "b-1" );
   //midimapper.put( ref( device, 57 ), "b-2" );
   //midimapper.put( ref( device, 59 ), "b-3" );
@@ -223,21 +222,22 @@ void setupGUI(){
               float max = c.getMax();
               c.setValue(map(b[ 2 ], 0, 127, min, max) );
             }  else if ( c instanceof Button ) {
-              if ( b[ 2 ] > 0 ) {
+              if ( b[ 2 ] > 64 ) {
                 c.setValue( c.getValue( ) );
                 c.setColorBackground( 0xff08a2cf );
               } else {
                 c.setColorBackground( 0xff003652 );
               }
             } else if ( c instanceof Bang ) {
-              if ( b[ 2 ] > 0 ) {
+             
+              if ( b[ 2 ] > 64 ) {
                 c.setValue( c.getValue( ) );
                 c.setColorForeground( 0xff08a2cf );
               } else {
                 c.setColorForeground( 0xff00698c );
               }
             } else if ( c instanceof Toggle ) {
-              if ( b[ 2 ] > 0 ) {
+              if ( b[ 2 ] > 64 ) {
                 ( ( Toggle ) c ).toggle( );
               }
             }

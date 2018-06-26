@@ -79,6 +79,7 @@ public void swirl(){
 }
 
 public void movingCircles(){
+  print("got here|");
   if(movingCirclesScene != null){
     if(movingCirclesScene.circleCount() > 0){ 
       movingCirclesScene.deleteCircles();
