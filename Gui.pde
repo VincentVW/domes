@@ -34,16 +34,16 @@ void setupGUI(){
 
   // LED COLOR RELATED
   d1 = cp5.addDropdownList("ledColorScheme")
-          .setSize(90,100)
+          .setSize(100,100)
           .setPosition(1100, 200)
           ;
   d1.addItems(colorSchemes);
   d1.close();
 
   d2 = cp5.addDropdownList("alphaFuzz")
-          .setLabel("Alpha Fuzz")
-          .setSize(90,100)
-          .setPosition(1200, 200)
+          .setLabel("One time alpha Fuzz")
+          .setSize(100,100)
+          .setPosition(1204, 200)
           ;
 
   d2.addItem("off", 0);
@@ -53,8 +53,8 @@ void setupGUI(){
 
   // add a horizontal slider
   cp5.addSlider("ledsAlpha")
-     .setPosition(1300,200)
-     .setSize(200,20)
+     .setPosition(1310,200)
+     .setSize(190,20)
      .setRange(1,255)
      .setValue(255)
      ;
@@ -96,7 +96,7 @@ void setupGUI(){
 
    cp5.addToggle("swirl")
    .setLabel("Swirl test")
-   .setPosition(1400,200)
+   .setPosition(1400,40)
    .setSize(100,19)
    ;
 
@@ -173,13 +173,33 @@ void setupGUI(){
   midimapper.put( ref( device, 15 ), "scrubBack" );
   midimapper.put( ref( device, 16 ), "scrubForward" );
   midimapper.put( ref( device, 17 ), "resetScrub" );
-  //midimapper.put( ref( device, 64 ), "a-6" );
+  
+  
+  midimapper.put( ref( device, 7 ), "allOn" );
+  midimapper.put( ref( device, 8 ), "turnOff" );
+  
+  midimapper.put( ref( device, 11 ), "swirl" );
+  midimapper.put( ref( device, 12 ), "leftRight" );
+  midimapper.put( ref( device, 13 ), "insideOut" );
+  midimapper.put( ref( device, 14 ), "alphaAnimate" );
+  
+  
+  midimapper.put( ref( device, 54 ), "spotlight" );
+  midimapper.put( ref( device, 56 ), "movingCircles" );
+  //midimapper.put( ref( device, 58 ), "animateAlpha" );
+  
+  //midimapper.put( ref( device, 53 ), "a-6" );
 
-  //midimapper.put( ref( device, 16 ), "b-1" );
-  //midimapper.put( ref( device, 17 ), "b-2" );
-  //midimapper.put( ref( device, 18 ), "b-3" );
+  //midimapper.put( ref( device, 55 ), "b-1" );
+  //midimapper.put( ref( device, 57 ), "b-2" );
+  //midimapper.put( ref( device, 59 ), "b-3" );
+  //midimapper.put( ref( device, 60 ), "b-3" );
+  //midimapper.put( ref( device, 62 ), "b-3" );
+  //midimapper.put( ref( device, 64 ), "b-3" );
+  //midimapper.put( ref( device, 65 ), "b-3" );
+  //midimapper.put( ref( device, 67 ), "b-3" );
 
-  boolean DEBUG = true;
+  boolean DEBUG = false;
 
   if (DEBUG) {
     new MidiSimple( device );

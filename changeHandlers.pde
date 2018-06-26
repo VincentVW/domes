@@ -20,7 +20,7 @@ public void insideOut() {
   currentAnimationIndex = 0;
   currentAnimationMaxIndex = 140;
   currentAnimationIndexSteps = 2;
-  currentAnimationRange = 1;
+  currentAnimationRange = 40;
   currentAnimationDome = 0;
 }
 
